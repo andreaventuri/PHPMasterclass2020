@@ -1,0 +1,11 @@
+.tblArticles{
+    border:1px solid #cecece;
+    border-collapse: collapse;
+    margin: 20px 0 20px 0;
+    padding: 0;
+}
+.tblArticles td, .tblArticles th{
+    border:1px solid #cecece;
+    margin: 0;
+    padding: 3px 5px;
+}
