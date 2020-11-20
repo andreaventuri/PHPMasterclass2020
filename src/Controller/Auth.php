@@ -38,8 +38,7 @@ class Auth implements ControllerInterface
 				exit;
 			}
 
-			header('Location: /auth/login');
-			exit;
+			echo $this->plates->render('login', ['messages' => $result->getMessages()]);
 		}
 		else
 		{

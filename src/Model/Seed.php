@@ -3,21 +3,41 @@
 namespace SimpleMVC\Model;
 
 use Carbon\Carbon;
-use Illuminate\Database\Capsule\Manager;
+use Illuminate\Database\Capsule\Manager as Capsule;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Schema\SQLiteBuilder as Schema;
 
 class Seed
 {
 	protected $db;
 
-	public function __construct(Manager $db)
+	public function __construct(Capsule $db)
 	{
 		$this->db = $db;
 	}
 
 	public function run()
 	{
-		$this->db->table('articles')->delete();
-		$this->db->table('authors')->delete();
+		$schema = new Schema($this->db->getConnection());
+
+		$schema->refreshDatabaseFile();
+
+		$schema->create('authors', function (Blueprint $table) {
+			$table->id();
+			$table->string('name');
+			$table->string('username');
+			$table->string('password');
+			$table->timestamps();
+		});
+
+		$schema->create('articles', function (Blueprint $table) {
+			$table->id();
+			$table->foreignId('author_id');
+			$table->string('title');
+            $table->string('content');
+            $table->timestamps();
+		});
+
 
 		$author = new Author();
 		$author->name = 'Mario Rossi';

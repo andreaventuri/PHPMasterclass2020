@@ -3,6 +3,17 @@
 
 <h1>Article</h1>
 
+<?php if(!empty($messages)): ?>
+
+	<?php foreach($messages as $message): ?>
+
+		<p style="color:red"><?= $message ?></p>
+
+	<?php endforeach ?>
+
+<?php endif ?>
+
+
 <form method="POST" action="/auth">
 
 	<div>
